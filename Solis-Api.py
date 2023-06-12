@@ -100,3 +100,4 @@ schedule.every(1).minutes.do(job)
 # Run the scheduler
 while True:
     schedule.run_pending()
+    time.sleep(1)
