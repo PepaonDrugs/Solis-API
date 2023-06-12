@@ -95,7 +95,7 @@ def job():
     main()
 
 # Schedule the job to run every 5 minutes
-schedule.every(5).minutes.do(job)
+schedule.every(1).minutes.do(job)
 
 # Run the scheduler
 while True:
