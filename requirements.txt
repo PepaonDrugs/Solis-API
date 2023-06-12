@@ -2,3 +2,4 @@ influxdb-client
 paho-mqtt
 influxdb
 schedule
+requests
