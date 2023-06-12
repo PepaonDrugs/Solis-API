@@ -24,4 +24,4 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY Solis-Api.py ./
 
-CMD [ "python", "./Solis-Api" ]
+CMD [ "python", "./Solis-Api.py" ]
