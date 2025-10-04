@@ -29,6 +29,21 @@ MQTT_PASS = os.environ.get("MQTT_PASS", "")
 
 mqtt_client = None  # global client
 
+numeric_fields = [
+    "all", "normal", "fault", "offline", "building", "mppt", "fullHour",
+    "dayPowerGeneration", "monthCarbonDioxide", "dip", "azimuth", "power",
+    "timeZone", "daylight", "price", "capacity", "capacityPercent",
+    "dayEnergy", "dayIncome", "monthEnergy", "yearEnergy", "allEnergy",
+    "allEnergy1", "allIncome", "updateDate", "type", "epmType", "gridSwitch",
+    "gridSwitch1", "dcInputType", "stationTypeNew", "batteryTotalDischargeEnergy",
+    "batteryTotalChargeEnergy", "gridPurchasedTotalEnergy", "gridSellTotalEnergy",
+    "homeLoadTotalEnergy", "oneSelf", "batteryTodayDischargeEnergy",
+    "batteryTodayChargeEnergy", "gridPurchasedTodayEnergy", "gridSellTodayEnergy",
+    "homeLoadTodayEnergy", "oneSelfTotal", "monthEnergy1", "dayEnergy1",
+    "yearEnergy1", "power1"
+]
+
+
 
 class HMACAuth(AuthBase):
     def __init__(self, key, secret):
@@ -52,19 +67,7 @@ def write_to_influxdb(data):
     client = InfluxDBClient(host=host, port=port, username=username, password=password)
     client.switch_database(database)
 
-    numeric_fields = [
-        "all", "normal", "fault", "offline", "building", "mppt", "fullHour",
-        "dayPowerGeneration", "monthCarbonDioxide", "dip", "azimuth", "power",
-        "timeZone", "daylight", "price", "capacity", "capacityPercent",
-        "dayEnergy", "dayIncome", "monthEnergy", "yearEnergy", "allEnergy",
-        "allEnergy1", "allIncome", "updateDate", "type", "epmType", "gridSwitch",
-        "gridSwitch1", "dcInputType", "stationTypeNew", "batteryTotalDischargeEnergy",
-        "batteryTotalChargeEnergy", "gridPurchasedTotalEnergy", "gridSellTotalEnergy",
-        "homeLoadTotalEnergy", "oneSelf", "batteryTodayDischargeEnergy",
-        "batteryTodayChargeEnergy", "gridPurchasedTodayEnergy", "gridSellTodayEnergy",
-        "homeLoadTodayEnergy", "oneSelfTotal", "monthEnergy1", "dayEnergy1",
-        "yearEnergy1", "power1"
-    ]
+
 
     json_body = [
         {
@@ -171,4 +174,5 @@ schedule.every(4).minutes.do(job)
 while True:
     schedule.run_pending()
     time.sleep(1)
+
 
