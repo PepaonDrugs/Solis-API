@@ -116,10 +116,15 @@ def init_mqtt():
 def publish_mqtt(data):
     if mqtt_client:
         try:
-            mqtt_client.publish(MQTT_TOPIC, json.dumps(data))
-            print(f"Published to MQTT topic: {MQTT_TOPIC}")
+            record = data["data"]["page"]["records"][0]
+            for field in numeric_fields:
+                if field in record:
+                    topic = f"{MQTT_TOPIC}/{field}"
+                    mqtt_client.publish(topic, record[field])
+            print(f"Published {len(record)} fields to MQTT under {MQTT_TOPIC}/<field>")
         except Exception as e:
             print(f"MQTT publish error: {e}")
+
 
 
 def main():
@@ -166,3 +171,4 @@ schedule.every(4).minutes.do(job)
 while True:
     schedule.run_pending()
     time.sleep(1)
+
