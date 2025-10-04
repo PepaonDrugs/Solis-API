@@ -16,7 +16,13 @@ ENV KEYID=""
 ENV KEYSECRET=""            
 
 
-
+# MQTT configuration
+ENV ENABLE_MQTT="false"
+ENV MQTT_HOST="mqtt"
+ENV MQTT_PORT=1883
+ENV MQTT_TOPIC="solis/data"
+ENV MQTT_USER=""
+ENV MQTT_PASS=""
 
 
 COPY requirements.txt ./
